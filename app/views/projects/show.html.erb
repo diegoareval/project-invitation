@@ -4,6 +4,11 @@
   <strong>Name:</strong>
   <%= @project.name %>
 </p>
-<%= link_to 'Invite', new_user_invitation_path(project_id: @project.id) %>
+<%= form_for [ @project, ProjectUser.new] do |f|%>
+<div>
+  <%= f.text_field :email, required: true %>
+</div>
+  <%= f.submit %>
+  <%end %>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
