@@ -4,11 +4,19 @@
   <strong>Name:</strong>
   <%= @project.name %>
 </p>
-<%= form_for [ @project, ProjectUser.new] do |f|%>
-<div>
-  <%= f.text_field :email, required: true %>
-</div>
-  <%= f.submit %>
-  <%end %>
+
+<h4>Users</h4>
+<% @project.users.each do |user| %>
+  <div><%= user.email %></div>
+<% end %>
+
+<h4>Invite User</h4>
+<%= form_for [@project, ProjectUser.new] do |f| %>
+  <div>
+    <%= f.text_field :email, required: true %>
+  </div>
+  <%= f.submit "Invite" %>
+<% end %>
+
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
